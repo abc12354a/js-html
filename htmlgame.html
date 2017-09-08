@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>game</title>
+    <style media="screen">
+      canvas{
+        border: 1px black solid;
+      }
+    }></style>
+  </head>
+  <body>
+    <canvas id="id-canvas" width="400" height="300"></canvas>
+    <script>
+
+    var imagefrompath = function(path){
+      var img = new Image()
+      img.src = path
+      return img
+    }
+     var Brick = function(){
+       var image = imagefrompath('brick.png')
+       var o = {
+         speed: 5,
+         image: image,
+         x: 150,
+         y: 200,
+       }
+       return o
+     }
+
+var __main = function(){
+    var canvas = document.querySelector('#id-canvas')
+    var context = canvas.getContext('2d')
+    var brick = Brick()
+    var leftdown = false
+    var rightdown = false
+  window.addEventListener('keydown',function(event){
+    var key = event.key
+    if(key == 'a'){
+        leftdown = true
+      }
+    else if(key == 'd'){
+        rightdown = true
+      }
+})
+  window.addEventListener('keyup',function(event){
+      var key = event.key
+      if(key == 'a'){
+        leftdown = false
+      }
+      else if(key == 'd'){
+        rightdown = false
+      }
+})
+setInterval(function(){
+//update x and y
+if(leftdown)
+{
+  brick.x -= brick.speed
+}
+else if (rightdown) {
+  brick.x += brick.speed
+}
+context.clearRect(0,0,canvas.width,canvas.height)
+context.drawImage(brick.img,brick.x,brick.y)
+},1000/60)
+}
+  __main()
+    </script>
+  </body>
+</html>
