@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--created by angus 27/8/2017-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>calculate</title>
+    <style type="text/css">
+    #container{
+        width:640px;
+        height: 550px;
+        /*background-color: grey;*/
+    }
+    body
+    {
+        margin: 0px;
+    }
+    #header{
+        text-align: center;
+        line-height: normal;
+        width: 300px;
+        height:10%;
+        color: coral;
+        font-weight: bold;
+        border: 1px;
+        /*background-color: antiquewhite;*/
+    }
+    #container_menu{
+        width: 30%;
+        height:80%;
+
+        /*background-color: dodgerblue;*/
+        float: left;
+    }
+    #containter_body{
+        width: 70%;
+        height:80%;
+        /*background-color: coral;*/
+        float: left;
+    }
+    #bottom{
+        width: 300px;
+        height:10%;
+        text-align: center;
+        /*background-color: indigo;*/
+        float: left;
+    }
+    #rdlist{
+        font-size: small;
+    }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="header"><h1>Calculate</h1></div>
+    <div id="container_menu"><p><b>type select</b></p>
+        <select id="typeselect">
+            <option value="1">伯努利分布</option>
+            <option value="2">泊松分布</option>
+            <!--<option value="3">指数分布</option>-->
+            <!--<option value="4">负二项分布</option>-->
+        </select>是否累加<input type="checkbox" id="checkc">
+        <br/><br/><br/><br/><br/>
+        <p><b>read me</b></p>
+        <ul id="rdlist">
+            <li>伯努利分布</li>
+            参数1为k,参数2为样本数量n,参数3为概率p.
+            <li>泊松分布</li>
+            参数1为k,参数2为lambda.
+        </ul>
+    </div>
+    <div id="containter_body">
+        <p><b>argument</b></p>
+        参数1<textarea id="arg1", style="width: 100px;height: 10px;resize: none"></textarea><br/>
+        参数2<textarea id="arg2", style="width: 100px;height: 10px;resize: none"></textarea><br/>
+        参数3<textarea id="arg3", style="width: 100px;height: 10px;resize: none"></textarea><br/>
+        <button id="ok", onclick="select(this.value)">submit</button>
+        <p id="result">result.</p>
+    </div>
+    <div id="bottom">
+        copyright reserved.<br/>
+        made by angus 27/8/2017
+    </div>
+</div>
+<script type="text/javascript">
+    function binpdf(arg1,arg2,arg3) {
+        var checkobj = document.getElementById("checkc");
+        var checked = checkobj.checked;
+        var Cmn = calmn(arg1,arg2);
+        var mresult = 0;
+        var count = 1;
+        while (count<=arg1){
+            mresult += calmn(count,arg2)*Math.pow(arg3,count)*Math.pow((1-arg3),(arg2-count));
+            count += 1;
+        }
+        var p1 = Math.pow(arg3,arg1);
+        var p2 = Math.pow((1-arg3),(arg2-arg1));
+        var result = Cmn*p1*p2;
+//        var mresult = MCmn*p1*p2;
+        if(checked)
+            document.getElementById("result").innerHTML=mresult;
+        else
+            document.getElementById("result").innerHTML=result;
+    }
+    function possi(arg1,arg2) {
+        var checkobj = document.getElementById("checkc");
+        var checked = checkobj.checked;
+        var k = 1;
+        for(i = 1;i<=arg1;i++)
+            k *= i;
+        var e = 2.718;
+        var mresult = 0;
+        var count = 1;
+        while(count<=arg1){
+            mresult += Math.pow(arg2,count)*Math.pow(e,-arg2)/greatpow(count);
+            count ++;
+        }
+        var result = Math.pow(arg2,arg1)*Math.pow(e,-arg2)/k;
+        if(checked)
+            document.getElementById("result").innerHTML = mresult;
+        else
+            document.getElementById("result").innerHTML = result;
+    }
+//    function power(arg1,arg2,arg3) {
+//
+//    }
+//    function nbinpdf(arg1,arg2,arg3) {
+//        var checkobj = document.getElementById("checkc");
+//        var checked = checkobj.checked;
+//        var Cmn = calmn(arg1-1,arg2-1);
+//        var mresult = 0;
+//        var count = 1;
+//        while (count<=arg1){
+//            mresult += calmn(count-1,arg2-1)*Math.pow(arg3,count)*Math.pow((1-arg3),(arg2-count));
+//            count += 1;
+//        }
+//        var p1 = Math.pow(arg3,arg1);
+//        var p2 = Math.pow((1-arg3),(arg2-arg1));
+//        var result = Cmn*p1*p2;
+////        var mresult = MCmn*p1*p2;
+//        if(checked)
+//            document.getElementById("result").innerHTML=mresult;
+//        else
+//            document.getElementById("result").innerHTML=result;
+//    }
+    function calmn(arg1,arg2) {
+        var n = 1;
+        var m = 1;
+        var k = 1;
+        for(i=1;i<=arg2;i++)
+            n *= i;
+        for(i=1;i<=arg1;i++)
+            m *= i;
+        for(i=1;i<=(arg2-arg1);i++)
+            k *= i;
+        return Cmn = n/(k*m);
+    }
+    function greatpow(arg1) {
+        var k = 1;
+        for(i = 1;i<=arg1;i++)
+            k *= i;
+        return k;
+    }
+    function select(value){
+        var type = document.getElementById("typeselect");
+        var arg1 = document.getElementById("arg1").value;
+        var arg2 = document.getElementById("arg2").value;
+        var arg3 = document.getElementById("arg3").value;
+//        if(arg1>arg2||arg3>1) {
+//            document.getElementById("result").innerHTML = "error";
+//            return 0;
+//        }
+        var choice = type.selectedIndex;
+        switch (choice) {
+            case 0:
+                binpdf(arg1,arg2,arg3);
+                break;
+            case 1:
+                possi(arg1,arg2);
+                break;
+//            case 2:
+//                power(arg1,arg2,arg3);
+//                break;
+//            case 3:
+//                nbinpdf(arg1,arg2,arg3);
+//                break;
+        }
+    }
+</script>
+</body>
+</html>
