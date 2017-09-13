@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>div layout</title>
+    <style type="text/css">
+        #container{
+            width:100%;
+            height: 950px;
+            background-color: grey;
+        }
+        body
+        {
+            margin: 0px;
+        }
+        #header{
+            width: 100%;
+            height:10%;
+            background-image: url(background.gif);
+            text-align: center;
+            font-size: 45px;
+            color: #FFD39B;
+        }
+        #container_menu{
+            width: 20%;
+            height:80%;
+            background-image: url(navbar.gif);
+            float: left;
+        }
+        #containter_body{
+            width: 80%;
+            height:80%;
+            background-image: url(content.gif);
+            float: left;
+        }
+        #bottom{
+            width: 100%;
+            height:10%;
+            background-color: indigo;
+            float: left;
+        }
+        #nav{
+          text-align: center;
+          font-size: 38px;
+        }
+        a{
+          text-decoration-line: none;
+          color: black;
+        }
+    </style>
+    <script type="text/javascript">
+      function selfintro(){
+        var path="bb.jpg";
+        document.getElementById('myimage').innerHTML='<img src="'+path+'" />';
+      }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="header">首页<br/>
+        </div>
+        <div id="container_menu">
+          <p id="nav">导航</p>
+          <ul id="guide">
+            <li><a href="javascript:;" onclick="selfintro()">自我介绍</a></li><br/>
+            <li><a href="javascript:;" onclick="favorite">最喜爱的老师</a></li><br/>
+            <li><a href="javascript:;" onclick="homeintro">家庭介绍</a></li><br/>
+            <li><a href="javascript:;" onclick="teacherintro">介绍杨路明</a></li><br/>
+          </ul></div>
+
+        <div id="containter_body">
+          <div id="imagecontainer">
+
+          </div>
+          contentbody
+        </div>
+        <div id="bottom">bottom</div>
+    </div>
+</body>
+</html>
