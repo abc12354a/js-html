@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>div layout</title>
+    <style type="text/css">
+        #container{
+            width:100%;
+            height: 950px;
+            background-color: grey;
+        }
+        body
+        {
+            margin: 0px;
+        }
+        #header{
+            width: 100%;
+            height:10%;
+            background-image: url(background.gif);
+            text-align: center;
+            font-size: 45px;
+            color: #FFD39B;
+        }
+        #container_menu{
+            width: 20%;
+            height:80%;
+            background-image: url(navbar.gif);
+            float: left;
+        }
+        #containter_body{
+            width: 80%;
+            height:80%;
+            background-image: url(content.gif);
+            float: left;
+            display: inline;
+        }
+        #bottom{
+            width: 100%;
+            height:10%;
+            background-image: url(bottom.gif);
+            float: left;
+        }
+        #nav{
+          text-align: center;
+          font-size: 38px;
+        }
+        a{
+          text-decoration-line: none;
+          color: black;
+        }
+        #imagecontainer img{
+          width:  25%;
+          height: 25%;
+          /*transform: rotate(180deg);*/
+          display: inline;
+        }
+    </style>
+    <script type="text/javascript">
+      function selfintro(){
+        var path="bb2.jpg";
+        var test = "自我简介： 我是一名来自重庆的90后女孩儿，平时喜欢逛街、听歌、看电影等。特长是古筝和软笔书法，擅长与人沟通交流。最爱在炎热的夏天呆在空调房里吃火锅。热情是我的标签。超级爱狗狗，一直坚信狗狗是最忠诚的伙伴。"
+        document.getElementById('imagecontainer').innerHTML='<img src="'+path+'"/>';
+        document.getElementById('inter').innerHTML= test;
+      }
+      function favorite(){
+        var test = "我最喜爱的老师：我们都叫他曾哥，但是他更喜欢大家叫他阿曾。他是数学老师应该是理性思维较强的职业，但他教学的座右铭是：“爱，是教育的灵魂。”他关爱班上每一位同学，从不会用成绩来衡量所有人"
+        var path="favorite.jpg";
+        document.getElementById('inter').innerHTML= test;
+        document.getElementById('imagecontainer').innerHTML='<img src="'+path+'" />';
+      }
+      function homeintro(){
+        var path="homeintro.jpg";
+        var test = "家庭介绍：我的家庭可以用“独立”两个字来概括，母亲一位药师，父亲从事建筑方面的事业，平时我们三人各自住在不同的地方，不过我更亲近我母亲。外公、外婆奶奶身体康健，爷爷已经去世。我奶奶喜欢养鸭子，外婆喜欢养花、喜欢讲笑话。"
+        document.getElementById('inter').innerHTML= test;
+        document.getElementById('imagecontainer').innerHTML='<img src="'+path+'" />';
+      }
+      function teacherintro(){
+        var path="teacher.jpg";
+        var test = "杨路明 教授、博士生导师。现为电子高等教育学会理事，全国高等学校电子信息科学与工程专业教学协作委员会委员，计算机科学与技术学部主任。"
+        document.getElementById('inter').innerHTML= test;
+        document.getElementById('imagecontainer').innerHTML='<img src="'+path+'" />';
+      }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div id="header">首页<br/>
+        </div>
+        <div id="container_menu">
+          <p id="nav">导航</p>
+          <ul id="guide">
+            <li><a href="javascript:;" onclick="selfintro()">自我介绍</a></li><br/>
+            <li><a href="javascript:;" onclick="favorite()">最喜爱的老师</a></li><br/>
+            <li><a href="javascript:;" onclick="homeintro()">家庭介绍</a></li><br/>
+            <li><a href="javascript:;" onclick="teacherintro()">介绍杨路明</a></li><br/>
+          </ul></div>
+
+        <div id="containter_body">
+          <div id="imagecontainer">
+          </div>
+          <p id="inter">李鑫的首页.</p>
+        </div>
+        <div id="bottom"></div>
+    </div>
+</body>
+</html>
