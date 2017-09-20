@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>哈弗曼编码</title>
+  <script>
+  	var huffman=function(s){
+	  	function List(){
+		  var list=[];
+		  //节点插入函数
+		  list.insert= function(node){
+		    if(this.length==0) return this.push(node);
+		    var l=0,r=this.length-1,v=node.v,x;
+		    while(r-l>1) //二分查找
+		      if(this[x=l+(r-l)/2|0].v<v)r=x
+		      else l=x;
+		    x=v-this[l].v<this[r].v-v?r+1:l;
+		    this.splice(x,0,node);
+		  }
+		  return list;
+		}
+
+		//节点操作函数
+		function Node(a,b){
+		      if(a.v&&b.v) this.a=a,this.b=b,this.v=a.v+b.v;
+		      else this.v=a,this.c=b;
+		}
+
+	  //返回函数
+	  return function(s){
+	    var map={},list=new List,result={},i,c;
+	    //建立有序频率序列
+
+	    //把序列中的值以“key(字符):value(次数)”的形式存在map对象中
+	    for(i=0;c=s.charAt(i);i++) c in map? map[c]++:map[c]=1;
+	    //遍历对象map的各个属性，并将其属性和值以Node节点的形式插入数组list中；
+	    for(i in map) list.push(new Node(map[i],i));
+	    //根据V(次数)的值对数组进行倒序排序
+	    list.sort(function(a,b){return b.v-a.v;});
+
+	    //建树
+	    while(list.length>1)
+	      //删除最后两个节点，合并最小的两个节点并插入合并节点
+	      list.insert(new Node(list.pop(),list.pop()));
+
+	    //遍历叶节点，获取结果集result
+	    //result[o]:以对象属性的方式存储字符，result[o].v存储该字符路径的十进制表示、result[o].d-记录该字符在树的第几层；
+	    (function callee(o,v,d){
+	      if(o.c)return result[o.c]=[v,d];
+	      callee(o.a,v*2,d+1),callee(o.b,v*2+1,d+1);
+	    })(list[0],0,0);
+	    //返回这个result对象
+	    return result;
+	  }
+	}();
+
+	function hafu(){
+	  var i,bin;
+	  var results="哈夫曼编码：";
+	  var test = document.getElementById('array').value;
+	  var r=huffman(test);
+
+	  //输出结果
+	  for(i in r){
+	    //r[i][0]存储的是result[o].v，字符路径的十进制表示
+	    bin=r[i][0].toString(2);
+	    //r[i][1]存储的是result[o].d，记录该字符在树的第几层，以便十进制转二进制后补0
+	    results +=(i+"-"+Array(r[i][1]-bin.length+1).join(0)+bin+", ");
+	    console.log(i,Array(r[i][1]-bin.length+1).join(0)+bin);
+	  }
+	  document.getElementsByTagName('p')[0].textContent=results;
+	}
+  </script>
+</head>
+<body>
+	<input type="text" id="array">
+	<button onclick="hafu()">哈弗曼编码</button>
+	<p></p>
+</body>
+</html>
