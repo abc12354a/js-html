@@ -29,3 +29,35 @@ function show(x) {
     document.getElementById("d1").innerHTML = MyOb.myabs(-5);
     document.getElementById("d1").innerHTML = abs(25);
 };
+var count = 0;
+var oldParseInt = parseInt;
+window.parseInt = function(){
+    count += 1;
+    return oldParseInt.apply(null,arguments);
+};
+function Intadd(x,y){
+    var Int = x=>x-0;//lambda function
+    return Int(x)+Int(y);
+}
+function pow(x){
+    return x*x;
+}
+function mymap(...rest){
+    var arr = [];
+    var i;
+    for(i = 0;i<arguments.length;i++){
+        arr.push(arguments[i]);
+    }
+    return arr.map(pow);
+}
+function NGf(){
+
+};
+function addon(s){
+    if(s==100)
+    return s;
+    else
+    return addon(s+1);
+};
+var now = new Date(2017,8,20,11,17,22);
+alert(now);
